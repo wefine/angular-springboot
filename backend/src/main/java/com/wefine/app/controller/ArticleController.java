@@ -21,7 +21,7 @@ public class ArticleController {
 
     @GetMapping("/article")
     public ResponseEntity<Article> getArticleById(@RequestParam("id") String id) {
-        Article article = articleService.getArticleById(Integer.parseInt(id));
+        Article article = articleService.getArticleById(Long.parseLong(id));
 
         return new ResponseEntity<>(article, HttpStatus.OK);
     }
@@ -54,7 +54,7 @@ public class ArticleController {
 
     @DeleteMapping("article")
     public ResponseEntity<Void> deleteArticle(@RequestParam("id") String id) {
-        articleService.deleteArticle(Integer.parseInt(id));
+        articleService.deleteArticle(Long.parseLong(id));
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

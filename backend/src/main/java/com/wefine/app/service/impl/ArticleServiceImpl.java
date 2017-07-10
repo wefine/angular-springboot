@@ -22,8 +22,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Article getArticleById(int articleId) {
-        return repository.findOne(articleId);
+    public Article getArticleById(Long id) {
+        return repository.findOne(id);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public void deleteArticle(int articleId) {
-        repository.delete(articleId);
+    public void deleteArticle(Long id) {
+        repository.delete(id);
     }
 }
