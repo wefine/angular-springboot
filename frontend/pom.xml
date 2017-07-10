@@ -19,34 +19,39 @@
                 <version>1.4</version>
 
                 <configuration>
-                    <nodeVersion>v6.10.1</nodeVersion>o
-                    <npmVersion>4.4.1</npmVersion>
+                    <nodeVersion>v6.10.1</nodeVersion>
+                    <yarnVersion>v0.27.5</yarnVersion>
                     <workingDirectory>src/main/frontend</workingDirectory>
                 </configuration>
 
                 <executions>
                     <execution>
-                        <id>install node and npm</id>
+                        <id>install node and yarn</id>
                         <goals>
-                            <goal>install-node-and-npm</goal>
+                            <goal>install-node-and-yarn</goal>
                         </goals>
+                        <phase>generate-resources</phase>
                     </execution>
 
                     <execution>
-                        <id>npm install</id>
+                        <id>yarn install</id>
+                        <phase>generate-resources</phase>
                         <goals>
-                            <goal>npm</goal>
+                            <goal>yarn</goal>
                         </goals>
-                    </execution>
-
-                    <execution>
-                        <id>npm run build</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-
                         <configuration>
-                            <arguments>run build</arguments>
+                            <arguments>install</arguments>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>yarn build</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>build</arguments>
                         </configuration>
                     </execution>
                 </executions>

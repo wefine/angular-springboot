@@ -8,10 +8,9 @@ import { Article } from './article';
 
 @Injectable()
 export class ArticleService {
+  private allArticlesUrl = 'api/articles';
+  private articleUrl = 'api/article';
 
-//URLs for CRUD operations
-  allArticlesUrl = 'http://localhost:4200/api/articles';
-  articleUrl = 'http://localhost:4200/api/article';
   //Create constructor to get Http instance
   constructor(private http: Http) {
   }
