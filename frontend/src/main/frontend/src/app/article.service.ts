@@ -5,10 +5,8 @@ import { Observable } from 'rxjs';
 
 import { Article } from './article';
 
-
 @Injectable()
 export class ArticleService {
-  private allArticlesUrl = 'api/articles';
   private articleUrl = 'api/article';
 
   //Create constructor to get Http instance
@@ -17,10 +15,9 @@ export class ArticleService {
 
   //Fetch all articles
   getAllArticles(): Observable<Article[]> {
-    return this.http.get(this.allArticlesUrl)
+    return this.http.get(this.articleUrl)
       .map(this.extractData)
       .catch(this.handleError);
-
   }
 
   //Create article
@@ -36,9 +33,9 @@ export class ArticleService {
   getArticleById(articleId: string): Observable<Article> {
     let cpHeaders = new Headers({'Content-Type': 'application/json'});
     let cpParams = new URLSearchParams();
-    cpParams.set('id', articleId);
+
     let options = new RequestOptions({headers: cpHeaders, params: cpParams});
-    return this.http.get(this.articleUrl, options)
+    return this.http.get(this.articleUrl+ "/" + articleId, options)
       .map(this.extractData)
       .catch(this.handleError);
   }
@@ -56,9 +53,9 @@ export class ArticleService {
   deleteArticleById(articleId: string): Observable<number> {
     let cpHeaders = new Headers({'Content-Type': 'application/json'});
     let cpParams = new URLSearchParams();
-    cpParams.set('id', articleId);
+
     let options = new RequestOptions({headers: cpHeaders, params: cpParams});
-    return this.http.delete(this.articleUrl, options)
+    return this.http.delete(this.articleUrl + "/" + articleId, options)
       .map(success => success.status)
       .catch(this.handleError);
   }
