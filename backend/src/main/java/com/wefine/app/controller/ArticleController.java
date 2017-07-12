@@ -14,29 +14,29 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api")
+@RequestMapping("api")
 public class ArticleController {
     @Resource
     private ArticleService articleService;
 
-    @GetMapping("/article")
+    @GetMapping("article")
     public ResponseEntity<Article> getArticleById(@RequestParam("id") String id) {
-        Article article = articleService.getArticleById(Long.parseLong(id));
+        Article article = articleService.findById(Long.parseLong(id));
 
         return new ResponseEntity<>(article, HttpStatus.OK);
     }
 
-    @GetMapping("/articles")
+    @GetMapping("articles")
     public ResponseEntity<List<Article>> getAllArticles() {
-        List<Article> list = articleService.getAllArticles();
+        List<Article> list = articleService.findAll();
 
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
     @PostMapping("article")
     public ResponseEntity<Void> createArticle(@RequestBody Article article, UriComponentsBuilder builder) {
-        boolean flag = articleService.createArticle(article);
-        if (!flag) {
+        Article a = articleService.create(article);
+        if (a.getId() == null) {
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
         HttpHeaders headers = new HttpHeaders();
@@ -47,14 +47,14 @@ public class ArticleController {
 
     @PutMapping("article")
     public ResponseEntity<Article> updateArticle(@RequestBody Article article) {
-        articleService.updateArticle(article);
+        articleService.update(article);
 
         return new ResponseEntity<>(article, HttpStatus.OK);
     }
 
     @DeleteMapping("article")
     public ResponseEntity<Void> deleteArticle(@RequestParam("id") String id) {
-        articleService.deleteArticle(Long.parseLong(id));
+        articleService.delete(Long.parseLong(id));
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

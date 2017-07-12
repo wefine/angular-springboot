@@ -8,18 +8,18 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "t_article")
+@Table(name = "t_people")
 @Getter
 @Setter
-public class Article implements Serializable {
+public class People implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Long id;
+    private long id;
 
-    @Column(name = "title")
-    private String title;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "category")
-    private String category;
+    @Column(name = "age")
+    private int age;
 }
